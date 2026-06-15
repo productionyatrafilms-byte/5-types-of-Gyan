@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>What is Gyan? – 5 Types of Gyan</title>
+    <link rel="stylesheet" href="./css/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="./css/style.css" />
+    <link rel="stylesheet" href="./css/what.css" />
+  </head>
+  <body id="body">
+    <!-- Language Selector -->
+    <div id="langSelect">
+      <div id="language">
+        <label
+          ><input
+            type="radio"
+            onclick="val('English')"
+            name="lang"
+            id="en"
+            value="English"
+          /><span>E</span></label
+        >
+        <label
+          ><input
+            type="radio"
+            onclick="val('Hindi')"
+            name="lang"
+            id="hi"
+            value="Hindi"
+          /><span>H</span></label
+        >
+        <label
+          ><input
+            type="radio"
+            onclick="val('Gujrati')"
+            name="lang"
+            id="gu"
+            value="Gujrati"
+          /><span>G</span></label
+        >
+      </div>
+    </div>
+
+    <!-- Home Button -->
+    <a href="./index.html" class="what-home-btn" id="homeBtn">
+      <img src="./assets/images/home button.png" alt="home" />
+    </a>
+
+    <!-- Page Title -->
+    <h1 class="what-title">
+      <span class="english">What is Gyan?</span>
+      <span class="hindi">ज्ञान क्या है?</span>
+      <span class="gujrati">જ્ઞાન શું છે?</span>
+    </h1>
+
+    <!-- Decorative border frame (mostly off-canvas top) -->
+    <div class="media-frame-border"></div>
+
+    <!-- Prev Arrow -->
+    <button class="what-prev" id="whatPrev" aria-label="Previous slide">
+      <img src="./assets/images/prev.png" alt="" />
+    </button>
+
+    <!-- Media Swiper (slides injected from data.js) -->
+    <div class="media-wrap swiper" id="whatSwiper">
+      <div class="swiper-wrapper" id="whatSwiperWrapper"></div>
+    </div>
+
+    <!-- Next Arrow -->
+    <button class="what-next" id="whatNext" aria-label="Next slide">
+      <img src="./assets/images/next.png" alt="" />
+    </button>
+
+    <!-- Bottom Text Pill (spans injected from data.js) -->
+    <div class="what-pill">
+      <p class="what-pill-text" id="whatPillText"></p>
+    </div>
+
+    <!-- Side Panel -->
+    <div class="side-panel">
+      <!-- Section 1: What is Gyan? (current page — active) -->
+      <div class="side-item active" id="sideItem1">
+        <div class="side-tab">
+          <div class="side-circle">1</div>
+          <span class="side-label english">What is Gyan?</span>
+          <span class="side-label hindi">ज्ञान क्या है?</span>
+          <span class="side-label gujrati">જ્ઞાન શું છે?</span>
+        </div>
+      </div>
+
+      <!-- Section 2: 5 Types of Gyan (link to next page) -->
+      <div class="side-item" id="sideItem2">
+        <div class="side-tab" onclick="window.location.href = './types.html'">
+          <div class="side-circle">2</div>
+          <span class="side-label english">5 Types of Gyan</span>
+          <span class="side-label hindi">ज्ञान के 5 प्रकार</span>
+          <span class="side-label gujrati">જ્ઞાનના 5 પ્રકાર</span>
+        </div>
+      </div>
+    </div>
+
+    <script src="./js/swiper-bundle.min.js"></script>
+    <script src="./js/jquery-3.7.1.js"></script>
+    <script src="./js/data.js"></script>
+    <script src="./js/custom.js"></script>
+    <script>
+      (function () {
+        var slideIndex = 0;
+        var slideLang = "english";
+
+        // Build slides from whatData
+        var wrapper = document.getElementById("whatSwiperWrapper");
+        whatData.slides.forEach(function (s) {
+          var div = document.createElement("div");
+          div.className = "swiper-slide";
+          if (s.type === "video") {
+            var v = document.createElement("video");
+            v.src = s.src;
+            v.muted = true;
+            v.loop = true;
+            v.setAttribute("playsinline", "");
+            div.appendChild(v);
+          } else {
+            var img = document.createElement("img");
+            img.src = s.src;
+            img.alt = "";
+            div.appendChild(img);
+          }
+          wrapper.appendChild(div);
+        });
+
+        // Build pill spans from whatData
+        var pillText = document.getElementById("whatPillText");
+        whatData.slides.forEach(function (s, i) {
+          ["english", "hindi", "gujrati"].forEach(function (lang) {
+            var span = document.createElement("span");
+            span.className = "slide-text slide-" + (i + 1) + " " + lang;
+            span.textContent = s.text[lang];
+            pillText.appendChild(span);
+          });
+        });
+
+        var whatSwiper = new Swiper("#whatSwiper", {
+          direction: "horizontal",
+          slidesPerView: 1,
+          speed: 600,
+          loop: false,
+          grabCursor: true,
+          keyboard: { enabled: true, onlyInViewport: true },
+        });
+
+        function updatePillText() {
+          document
+            .querySelectorAll(".what-pill-text .slide-text")
+            .forEach(function (el) {
+              el.classList.remove("active");
+            });
+          var el = document.querySelector(
+            ".what-pill-text .slide-" + (slideIndex + 1) + "." + slideLang,
+          );
+          if (el) el.classList.add("active");
+        }
+
+        function updateSlide(index) {
+          slideIndex = index;
+          updatePillText();
+          document
+            .querySelectorAll(".swiper-slide video")
+            .forEach(function (v, i) {
+              if (i === index) {
+                v.play();
+              } else {
+                v.pause();
+              }
+            });
+        }
+
+        var _origVal = typeof val === "function" ? val : null;
+        window.val = function (lang) {
+          if (_origVal) _origVal(lang);
+          var map = { English: "english", Hindi: "hindi", Gujrati: "gujrati" };
+          slideLang = map[lang] || "english";
+          updatePillText();
+        };
+
+        whatSwiper.on("slideChange", function () {
+          updateSlide(whatSwiper.activeIndex);
+        });
+        document
+          .getElementById("whatPrev")
+          .addEventListener("click", function () {
+            whatSwiper.slidePrev();
+          });
+        document
+          .getElementById("whatNext")
+          .addEventListener("click", function () {
+            whatSwiper.slideNext();
+          });
+
+        var initLang = sessionStorage.getItem("lang") || "English";
+        window.val(initLang);
+      })();
+    </script>
+  </body>
+</html>

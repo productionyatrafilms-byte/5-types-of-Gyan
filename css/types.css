@@ -1,0 +1,320 @@
+@import url("https://fonts.googleapis.com/css2?family=Spicy+Rice&family=Baloo+2:wght@400;700&family=Anton&display=swap");
+
+:root {
+  --purple: #8a38f5;
+  --red-media: #f03030;
+  --text-dark: #424242;
+}
+
+html {
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  position: relative;
+  width: 100vw;
+  height: 56.25vw;
+  overflow: hidden;
+  background: url("../assets/images/bg2.png") center / 100% 100% no-repeat;
+}
+
+/* ── Waves ── */
+.waves {
+  position: absolute;
+  z-index: 1;
+  pointer-events: none;
+}
+.waves-right {
+  top: 10%;
+  left: 53.36%;
+  width: 45.94%;
+  height: auto;
+}
+.waves-left {
+  top: 13%;
+  right: 53.36%;
+  width: 45.94%;
+  height: auto;
+}
+
+/* ── Page Title ── */
+.types-title {
+  position: absolute;
+  top: 3.39%;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  font-family: "Spicy Rice", cursive;
+  font-size: clamp(1rem, 3.5vw, 4rem);
+  color: white;
+  font-weight: 400;
+  text-shadow: 0 0.21vw 0.21vw rgba(0, 0, 0, 0.25);
+  line-height: 1;
+  margin: 0;
+  padding: 0;
+  z-index: 5;
+  pointer-events: none;
+}
+
+.types-title[data-lang="hindi"],
+.types-title[data-lang="gujrati"] {
+  font-weight: 800;
+}
+
+/* ── Decorative border frame ── */
+.types-frame-border {
+  position: absolute;
+  left: 32.03%;
+  top: -13.63%;
+  width: 38.18%;
+  height: 26%;
+  border: 0.36vw solid white;
+  border-radius: 1.61vw;
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* ── Media Container (Swiper) ── */
+.types-wrap {
+  position: absolute;
+  left: 30.26%;
+  top: 18%;
+  width: 42.19%;
+  height: 49.44%;
+  background: var(--red-media);
+  border-radius: 2.08vw;
+  border: 0.6vw solid white;
+  overflow: hidden;
+  z-index: 2;
+}
+
+.types-wrap .swiper-wrapper {
+  height: 100%;
+}
+
+.types-wrap .swiper-slide {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.types-wrap .swiper-slide video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* ── Prev / Next Arrows ── */
+.types-prev,
+.types-next {
+  position: absolute;
+  top: 36%;
+  width: 4.17%;
+  height: auto;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  z-index: 5;
+  filter: drop-shadow(0 0.52vw 0.1vw rgba(0, 0, 0, 0.4));
+  transition: transform 0.2s ease;
+}
+
+.types-prev:hover,
+.types-next:hover {
+  transform: scale(1.08);
+}
+
+.types-prev {
+  left: 18.37%;
+}
+.types-next {
+  left: 79.69%;
+}
+
+.types-prev img,
+.types-next img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ── Bottom Text Pill ── */
+.types-pill {
+  position: absolute;
+  left: 20.44%;
+  top: 70%;
+  width: 61.35%;
+  background: white;
+  border-radius: 3.85vw;
+  box-shadow: 0 0.21vw 0.21vw rgba(0, 0, 0, 0.25);
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5vw 3vw;
+}
+
+.types-pill-text {
+  font-family: "Anton", sans-serif;
+  font-size: clamp(0.6rem, 1.7vw, 2rem);
+  color: var(--purple);
+  text-align: center;
+  line-height: 1.3;
+  margin: 0;
+  width: 100%;
+}
+
+.types-pill-text[data-lang="hindi"],
+.types-pill-text[data-lang="gujrati"] {
+  font-weight: 800;
+}
+
+/* ── Side Panel ── */
+.side-panel {
+  position: fixed;
+  right: 1vw;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 6;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8vw;
+  transition: right 0.35s ease;
+}
+
+.side-panel:hover {
+  right: 0;
+}
+
+.side-item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.side-tab {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  background: white;
+  border-radius: 2vw 0 0 2vw;
+  padding: 0.4vw 2.5vw 0.4vw 0.5vw;
+  margin-right: -1vw;
+  box-shadow: 0 0.21vw 0.21vw rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+  overflow: hidden;
+  transition:
+    padding 0.35s ease,
+    margin-right 0.35s ease;
+}
+
+.side-circle {
+  width: 2.5vw;
+  height: 2.5vw;
+  border-radius: 50%;
+  border: 0.15vw solid #a1cafe;
+  background: #a1cafe;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Baloo 2", cursive;
+  font-size: clamp(0.7rem, 1.35vw, 1.6rem);
+  color: #424242;
+  font-weight: 700;
+  flex-shrink: 0;
+  transition:
+    background 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.side-label {
+  font-family: "Baloo 2", cursive;
+  font-size: clamp(0.5rem, 1.04vw, 1.2rem);
+  color: var(--text-dark);
+  font-weight: 400;
+  white-space: nowrap;
+  max-width: 0;
+  opacity: 0;
+  overflow: hidden;
+  margin-left: 0;
+  transition:
+    max-width 0.35s ease,
+    opacity 0.25s ease,
+    margin 0.35s ease;
+}
+
+.side-item:hover .side-tab {
+  padding: 0.4vw 0.8vw 0.4vw 0.5vw;
+  margin-right: 0;
+}
+
+.side-item:hover .side-label.english,
+.side-item:hover .side-label.hindi,
+.side-item:hover .side-label.gujrati {
+  max-width: 14vw;
+  opacity: 1;
+  margin-left: 0.6vw;
+}
+
+/* Active item — same as what.html */
+.side-item.active .side-circle {
+  background: #a1cafe;
+  border-color: #a1cafe;
+  color: #424242;
+}
+
+/* ── Home Button ── */
+.types-home-btn {
+  position: absolute;
+  left: 4.22%;
+  top: 5.19%;
+  width: 4.17%;
+  z-index: 10;
+  display: block;
+}
+
+.types-home-btn img {
+  width: 100%;
+  height: auto;
+  display: block;
+  filter: drop-shadow(0 0.21vw 0.1vw rgba(0, 0, 0, 0.25));
+}
+
+/* ── Language Selector overrides ── */
+#langSelect {
+  top: 5.89%;
+  right: 3.96%;
+}
+
+#language {
+  background: white;
+  border: none;
+  border-radius: 4vw;
+  padding: 0.3vw 0.5vw;
+  gap: 0.3vw;
+  box-shadow: 0 0.21vw 0.1vw rgba(0, 0, 0, 0.25);
+}
+
+#langSelect label span {
+  width: 2.4vw;
+  height: 2.4vw;
+  border: 0.15vw solid #d0d0d0;
+  border-radius: 50%;
+  font-size: 1.1vw;
+  font-family: "Baloo 2", cursive;
+  font-weight: 700;
+  color: #5d5d5d;
+  background: white;
+}
+
+#langSelect input:checked + span {
+  background: #5d5d5d;
+  color: white;
+  border-color: #5d5d5d;
+}

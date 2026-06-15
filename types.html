@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>5 Types of Gyan</title>
+    <link rel="stylesheet" href="./css/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="./css/style.css" />
+    <link rel="stylesheet" href="./css/types.css" />
+  </head>
+  <body id="body">
+    <!-- Language Selector -->
+    <div id="langSelect">
+      <div id="language">
+        <label
+          ><input
+            type="radio"
+            onclick="val('English')"
+            name="lang"
+            id="en"
+            value="English"
+          /><span>E</span></label
+        >
+        <label
+          ><input
+            type="radio"
+            onclick="val('Hindi')"
+            name="lang"
+            id="hi"
+            value="Hindi"
+          /><span>H</span></label
+        >
+        <label
+          ><input
+            type="radio"
+            onclick="val('Gujrati')"
+            name="lang"
+            id="gu"
+            value="Gujrati"
+          /><span>G</span></label
+        >
+      </div>
+    </div>
+
+    <!-- Home Button -->
+    <a href="./index.html" class="types-home-btn">
+      <img src="./assets/images/home button.png" alt="home" />
+    </a>
+
+    <!-- Page Title (dynamic — updates per type) -->
+    <h1 class="types-title" id="typesTitle"></h1>
+
+    <!-- Decorative border frame -->
+    <div class="types-frame-border"></div>
+
+    <!-- Prev Arrow -->
+    <button class="types-prev" id="typesPrev" aria-label="Previous slide">
+      <img src="./assets/images/prev.png" alt="" />
+    </button>
+
+    <!-- Media Swiper (slides injected from data.js) -->
+    <div class="types-wrap swiper" id="typesSwiper">
+      <div class="swiper-wrapper" id="typesSwiperWrapper"></div>
+    </div>
+
+    <!-- Next Arrow -->
+    <button class="types-next" id="typesNext" aria-label="Next slide">
+      <img src="./assets/images/next.png" alt="" />
+    </button>
+
+    <!-- Bottom Text Pill -->
+    <div class="types-pill">
+      <p class="types-pill-text" id="typesPillText"></p>
+    </div>
+
+    <!-- Side Panel -->
+    <div class="side-panel">
+      <div class="side-item" id="sideItem1">
+        <div class="side-tab" onclick="window.location.href = './what.html'">
+          <div class="side-circle">1</div>
+          <span class="side-label english">What is Gyan?</span>
+          <span class="side-label hindi">ज्ञान क्या है?</span>
+          <span class="side-label gujrati">જ્ઞાન શું છે?</span>
+        </div>
+      </div>
+      <div class="side-item active" id="sideItem2">
+        <div class="side-tab">
+          <div class="side-circle">2</div>
+          <span class="side-label english">5 Types of Gyan</span>
+          <span class="side-label hindi">ज्ञान के 5 प्रकार</span>
+          <span class="side-label gujrati">જ્ઞાનના 5 પ્રકાર</span>
+        </div>
+      </div>
+    </div>
+
+    <script src="./js/swiper-bundle.min.js"></script>
+    <script src="./js/jquery-3.7.1.js"></script>
+    <script src="./js/data.js"></script>
+    <script src="./js/custom.js"></script>
+    <script>
+      (function () {
+        var slideLang = "english";
+
+        // Build slides from typesData
+        var wrapper = document.getElementById("typesSwiperWrapper");
+        typesData.slides.forEach(function (s) {
+          var div = document.createElement("div");
+          div.className = "swiper-slide";
+          div.setAttribute("data-type", s.type);
+          var v = document.createElement("video");
+          v.src = s.src;
+          v.muted = true;
+          v.loop = true;
+          v.setAttribute("playsinline", "");
+          div.appendChild(v);
+          wrapper.appendChild(div);
+        });
+
+        function updateTitle(typeIndex) {
+          var t = typesData.types[typeIndex];
+          var el = document.getElementById("typesTitle");
+          el.textContent = t ? t[slideLang] || t.english : "";
+          el.setAttribute("data-lang", slideLang);
+        }
+
+        function getActiveType(index) {
+          var slide = typesData.slides[index];
+          return slide ? slide.type : 0;
+        }
+
+        function updatePill(index) {
+          var s = typesData.slides[index];
+          if (!s) return;
+          var el = document.getElementById("typesPillText");
+          el.textContent = s.text[slideLang] || s.text.english;
+          el.setAttribute("data-lang", slideLang);
+        }
+
+        function updateSlide(index) {
+          updateTitle(getActiveType(index));
+          updatePill(index);
+          document
+            .querySelectorAll(".swiper-slide video")
+            .forEach(function (v, i) {
+              if (i === index) {
+                v.play();
+              } else {
+                v.pause();
+              }
+            });
+        }
+
+        var typesSwiper = new Swiper("#typesSwiper", {
+          direction: "horizontal",
+          slidesPerView: 1,
+          speed: 600,
+          loop: false,
+          grabCursor: true,
+          keyboard: { enabled: true, onlyInViewport: true },
+        });
+
+        document
+          .getElementById("typesPrev")
+          .addEventListener("click", function () {
+            typesSwiper.slidePrev();
+          });
+        document
+          .getElementById("typesNext")
+          .addEventListener("click", function () {
+            typesSwiper.slideNext();
+          });
+        typesSwiper.on("slideChange", function () {
+          updateSlide(typesSwiper.activeIndex);
+        });
+
+        var _origVal = typeof val === "function" ? val : null;
+        window.val = function (lang) {
+          if (_origVal) _origVal(lang);
+          var map = { English: "english", Hindi: "hindi", Gujrati: "gujrati" };
+          slideLang = map[lang] || "english";
+          updateTitle(getActiveType(typesSwiper.activeIndex));
+          updatePill(typesSwiper.activeIndex);
+        };
+
+        var initLang = sessionStorage.getItem("lang") || "English";
+        window.val(initLang);
+      })();
+    </script>
+  </body>
+</html>

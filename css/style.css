@@ -1,0 +1,83 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    position: relative;
+    font-family: Poppins;
+    min-height: 100%;
+    overflow: hidden auto;
+}
+
+/* top right fixed language bar */
+#language {
+    background-color: transparent;
+    border: 0.2vw solid #D60250;
+    border-radius: 4vw;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.3vw 0.4vw;
+    gap: 0.2vw;
+}
+
+#language label {
+    cursor: pointer;
+}
+
+#langSelect {
+    position: absolute;
+    top: 4%;
+    right: 2%;
+    z-index: 999999;
+}
+
+#langSelect label {
+    padding: 0;
+    position: relative;
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+}
+
+#langSelect label input {
+    display: none;
+}
+
+#langSelect label span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.4vw;
+    height: 2.4vw;
+    border: 0.2vw solid #D60250;
+    border-radius: 50%;
+    font-size: 1.1vw;
+    font-family: "Hindi";
+    font-weight: bold;
+    color: #D60250;
+    background: transparent;
+    transition: background 0.2s, color 0.2s;
+}
+
+#langSelect input:checked+span {
+    background: #D60250;
+    color: white;
+    border-color: #D60250;
+}
+
+/* Hindi & Gujarati — use system default bold so native scripts render correctly */
+.hindi,
+.gujrati {
+    font-family: system-ui, sans-serif !important;
+    font-weight: bold !important;
+}

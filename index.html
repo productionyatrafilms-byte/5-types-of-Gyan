@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>5 Types of Gyan</title>
+  <link rel="stylesheet" href="./css/style.css" />
+  <link rel="stylesheet" href="./css/index.css" />
+</head>
+<body id="body" data-state="0">
+
+  <!-- Language Selector [language] -->
+  <div id="langSelect">
+    <div id="language">
+      <label><input type="radio" onclick="val('English')" name="lang" id="en" value="English" /><span>E</span></label>
+      <label><input type="radio" onclick="val('Hindi')" name="lang" id="hi" value="Hindi" /><span>H</span></label>
+      <label><input type="radio" onclick="val('Gujrati')" name="lang" id="gu" value="Gujrati" /><span>G</span></label>
+    </div>
+  </div>
+
+  <!-- Waves Right -->
+  <img src="./assets/images/wavesright.png" alt="" class="waves waves-right" />
+
+  <!-- Waves Left -->
+  <img src="./assets/images/wavesleft.png" alt="" class="waves waves-left" />
+
+  <!-- Head Character -->
+  <img src="./assets/images/head.png" alt="" class="head-char" id="headChar" />
+
+  <!-- Gyan Shapes (visible in state 2) -->
+  <div class="gyan-shapes">
+    <div class="gshape gshape-green"></div>
+    <div class="gshape gshape-orange"></div>
+    <div class="gshape gshape-blue-t"></div>
+    <div class="gshape gshape-blue-b"></div>
+    <div class="gshape gshape-teal"></div>
+    <div class="gshape gshape-teal-circle"></div>
+  </div>
+
+  <!-- Title: Large (state 1) -->
+  <div class="title-large" id="titleLarge">
+    <p class="title-text">
+      <span class="english">5 Types of Gyan</span>
+      <span class="hindi">ज्ञान के 5 प्रकार</span>
+      <span class="gujrati">જ્ઞાનના 5 પ્રકાર</span>
+    </p>
+  </div>
+
+  <!-- Title: Banner Pill (state 2) -->
+  <div class="title-banner" id="titleBanner">
+    <p class="banner-text">
+      <span class="english">5 Types of Gyan</span>
+      <span class="hindi">ज्ञान के 5 प्रकार</span>
+      <span class="gujrati">જ્ઞાનના 5 પ્રકાર</span>
+    </p>
+  </div>
+
+  <!-- Speech Bubble Left — "What is Gyan?" -->
+  <div class="bubble bubble-left" id="bubbleLeft">
+    <img src="./assets/images/bubbleyellow.png" alt="" class="bubble-img bubble-img-left bubble-yellow" />
+    <img src="./assets/images/bubblewhite.png" alt="" class="bubble-img bubble-img-left bubble-white" />
+    <p class="bubble-text">
+      <span class="english">What is<br>Gyan?</span>
+      <span class="hindi">ज्ञान<br>क्या है?</span>
+      <span class="gujrati">જ્ઞાન<br>શું છે?</span>
+    </p>
+  </div>
+
+  <!-- Speech Bubble Right — "5 Types of Gyan" -->
+  <div class="bubble bubble-right" id="bubbleRight">
+    <img src="./assets/images/bubbleyellow.png" alt="" class="bubble-img bubble-img-right bubble-yellow" />
+    <img src="./assets/images/bubblewhite.png" alt="" class="bubble-img bubble-img-right bubble-white" />
+    <p class="bubble-text">
+      <span class="english">5 Types<br>of<br>Gyan</span>
+      <span class="hindi">ज्ञान के<br>5 प्रकार</span>
+      <span class="gujrati">જ્ઞાનના<br>5 પ્રકાર</span>
+    </p>
+  </div>
+
+  <!-- Home Button [left-corner] -->
+  <a href="./home.html" class="home-btn left-corners" id="homeBtn">
+    <img src="./assets/images/home button.png" alt="home" />
+  </a>
+
+  <script src="./js/jquery-3.7.1.js"></script>
+  <script src="./js/custom.js"></script>
+  <script>
+    var canvas = document.getElementById('body');
+    var state = 0;
+
+    function setState(n) {
+      state = n;
+      canvas.setAttribute('data-state', String(n));
+    }
+
+    // Auto-transition: state 0 → state 1 after 800ms
+    setTimeout(function () {
+      setState(1);
+    }, 800);
+
+    // Click head in state 1 → state 2
+    document.getElementById('headChar').addEventListener('click', function () {
+      if (state === 1) setState(2);
+    });
+
+    // Bubble left → What is Gyan?
+    document.getElementById('bubbleLeft').addEventListener('click', function () {
+      window.location.href = './what.html';
+    });
+
+    // Bubble right → 5 Types of Gyan
+    document.getElementById('bubbleRight').addEventListener('click', function () {
+      window.location.href = './types.html';
+    });
+  </script>
+
+</body>
+</html>

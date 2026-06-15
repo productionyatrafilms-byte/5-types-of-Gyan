@@ -1,0 +1,355 @@
+@import url("https://fonts.googleapis.com/css2?family=Spicy+Rice&family=Baloo+2:wght@400;700&display=swap");
+
+:root {
+  --purple: #8a38f5;
+  --orange: #fe6f42;
+  --blue-shape: #a1cafe;
+  --teal-shape: #0a8479;
+  --green-shape: #9bcc5e;
+}
+
+/* ── Canvas: body acts as the 1920×1080 proportional frame ── */
+html {
+  height: 100%;
+  overflow: hidden;
+}
+body {
+  position: relative;
+  width: 100vw;
+  height: auto;
+  overflow: hidden;
+  background: url("../assets/images/bg.png") center / cover no-repeat;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+
+/* ── Waves ── */
+.waves {
+  position: absolute;
+  z-index: 1;
+  transition:
+    top 0.7s ease,
+    left 0.7s ease,
+    width 0.7s ease;
+}
+
+/* State 0 + State 2 — large, mid-screen */
+.waves-right {
+  top: 41.46%;
+  left: 67.74%;
+  width: 41.1%;
+  height: auto;
+}
+.waves-left {
+  top: 41.46%;
+  left: -8.22%;
+  width: 41.1%;
+  height: auto;
+}
+
+/* State 1 — small, bottom corners */
+[data-state="1"] .waves-right {
+  top: 68%;
+  left: 82.36%;
+  width: 20.94%;
+}
+[data-state="1"] .waves-left {
+  top: 68%;
+  left: -3.24%;
+  width: 20.88%;
+}
+
+/* ── Head Character ── */
+.head-char {
+  position: absolute;
+  left: 27%;
+  bottom: 0;
+  width: 44%;
+  height: auto;
+  z-index: 2;
+  cursor: default;
+  transition: cursor 0.2s;
+}
+[data-state="1"] .head-char {
+  cursor: pointer;
+}
+
+/* ── Gyan Shapes (hidden until state 2) ── */
+.gyan-shapes {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+}
+.gshape {
+  position: absolute;
+  opacity: 0;
+  transform: translateY(4vw);
+  transition:
+    opacity 0.4s ease,
+    transform 0.4s ease;
+  box-shadow: 0 0.21vw 0.21vw rgba(0, 0, 0, 0.25);
+}
+[data-state="2"] .gshape {
+  opacity: 1;
+  transform: translateY(0);
+}
+[data-state="2"] .gshape-green {
+  transition-delay: 0s;
+}
+[data-state="2"] .gshape-orange {
+  transition-delay: 0.05s;
+}
+[data-state="2"] .gshape-blue-t {
+  transition-delay: 0.1s;
+}
+[data-state="2"] .gshape-blue-b {
+  transition-delay: 0.13s;
+}
+[data-state="2"] .gshape-teal {
+  transition-delay: 0.16s;
+}
+[data-state="2"] .gshape-teal-circle {
+  transition-delay: 0.2s;
+}
+
+.gshape-green {
+  background: var(--green-shape);
+  bottom: 40%;
+  left: 46%;
+  width: 8%;
+  height: 37%;
+  border-radius: 5vw;
+}
+.gshape-orange {
+  background: var(--orange);
+  bottom: 50%;
+  left: 35%;
+  width: 10%;
+  height: 18%;
+  border-radius: 50%;
+}
+.gshape-blue-t {
+  background: var(--blue-shape);
+  bottom: 27%;
+  left: 36%;
+  width: 13.5%;
+  height: 12%;
+  border-radius: 4.13vw;
+}
+.gshape-blue-b {
+  background: var(--blue-shape);
+  bottom: 36%;
+  left: 37.4%;
+  width: 11%;
+  height: 13%;
+  z-index: -10;
+  border-radius: 4.13vw;
+}
+.gshape-teal {
+  background: var(--teal-shape);
+  bottom: 29%;
+  left: 48%;
+  width: 15%;
+  height: 11%;
+  border-radius: 4.13vw;
+}
+.gshape-teal-circle {
+  background: var(--teal-shape);
+  bottom: 37%;
+  left: 51%;
+  width: 9%;
+  height: 14%;
+  z-index: -1;
+  border-radius: 50%;
+}
+
+/* ── Title — Large (state 1) ── */
+.title-large {
+  position: absolute;
+  top: 15.91%;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  z-index: 4;
+  opacity: 0;
+  transform: translateY(-3vw);
+  transition:
+    opacity 0.5s ease,
+    transform 0.5s ease;
+  pointer-events: none;
+}
+.title-text {
+  font-family: "Spicy Rice", cursive;
+  font-size: clamp(2rem, 10.42vw, 12rem);
+  color: white;
+  text-shadow: 0 0.21vw 0.21vw rgba(0, 0, 0, 0.25);
+  line-height: 1;
+  margin: 0;
+}
+[data-state="1"] .title-large {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── Title — Banner Pill (state 2) ── */
+.title-banner {
+  position: absolute;
+  top: 2.92%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-8vw);
+  background: transparent;
+  border-radius: 0 0 0.8vw 0.8vw;
+  padding: 1.2vw 4vw;
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 0.4vw solid white;
+  border-top: none;
+  z-index: 5;
+  opacity: 0;
+  transition:
+    opacity 0.35s ease,
+    transform 0.35s ease;
+  pointer-events: none;
+  white-space: nowrap;
+}
+.banner-text {
+  font-family: "Spicy Rice", cursive;
+  font-size: clamp(1rem, 3.2vw, 4rem);
+  color: white;
+  text-shadow: 0 0.21vw 0.21vw rgba(0, 0, 0, 0.25);
+  line-height: 1;
+  margin: 0;
+}
+[data-state="2"] .title-banner {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* ── Speech Bubbles ── */
+.bubble {
+  position: absolute;
+  z-index: 4;
+  cursor: pointer;
+  opacity: 0;
+  transform: scale(0.85);
+  transition:
+    opacity 0.4s ease 0.25s,
+    transform 0.4s ease 0.25s;
+  pointer-events: none;
+}
+[data-state="2"] .bubble {
+  opacity: 1;
+  transform: scale(1);
+  pointer-events: auto;
+}
+.bubble:hover {
+  transform: scale(1.04);
+}
+
+.bubble-left {
+  bottom: 35%;
+  left: 14%;
+  width: 22%;
+  height: 36%;
+  z-index: 2;
+}
+.bubble-right {
+  bottom: 40%;
+  left: 60%;
+  width: 22%;
+  height: 36%;
+}
+
+.bubble-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  transition: opacity 0.2s ease;
+}
+.bubble-img-right {
+  transform: scaleX(-1);
+}
+.bubble-white { opacity: 0; }
+.bubble:hover .bubble-yellow { opacity: 0; }
+.bubble:hover .bubble-white { opacity: 1; }
+
+.bubble-text {
+  position: absolute;
+  top: 42%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: "Momo Trust Display", "Baloo 2", cursive;
+  font-size: clamp(0.8rem, 3.13vw, 4rem);
+  color: var(--purple);
+  font-weight: 700;
+  text-align: center;
+  line-height: 1.15;
+  width: 75%;
+  margin: 0;
+  pointer-events: none;
+}
+
+/* ── Home Button ── */
+.home-btn {
+  position: absolute;
+  left: 4.22%;
+  top: 5.19%;
+  width: 4.17%;
+  z-index: 10;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  display: block;
+}
+.home-btn img {
+  width: 100%;
+  height: auto;
+  display: block;
+  filter: drop-shadow(0 0.21vw 0.1vw rgba(0, 0, 0, 0.25));
+}
+[data-state="1"] .home-btn,
+[data-state="2"] .home-btn {
+  opacity: 1;
+}
+
+/* ── Language Selector overrides for this page ── */
+#langSelect {
+  top: 5.89%;
+  right: 3.96%;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+[data-state="1"] #langSelect,
+[data-state="2"] #langSelect {
+  opacity: 1;
+}
+
+/* Figma style: white pill, gray circles, Baloo font */
+#language {
+  background: white;
+  border: none;
+  border-radius: 4vw;
+  padding: 0.3vw 0.5vw;
+  gap: 0.3vw;
+  box-shadow: 0 0.21vw 0.1vw rgba(0, 0, 0, 0.25);
+}
+#langSelect label span {
+  width: 2.4vw;
+  height: 2.4vw;
+  border: 0.15vw solid #d0d0d0;
+  border-radius: 50%;
+  font-size: 1.1vw;
+  font-family: "Baloo 2", cursive;
+  font-weight: 700;
+  color: #5d5d5d;
+  background: white;
+}
+#langSelect input:checked + span {
+  background: #5d5d5d;
+  color: white;
+  border-color: #5d5d5d;
+}
