@@ -9,6 +9,18 @@ html {
     height: 100%;
 }
 
+/* Scroll like idontcare: the page scrolls vertically only when the content is taller than the window,
+   never sideways, and no scrollbar is drawn (a drawn one steals 15px, which pushes the 100vw frame
+   past the edge and makes the page scroll sideways). */
+html {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
 body {
     margin: 0;
     position: relative;

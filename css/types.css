@@ -7,16 +7,21 @@
 }
 
 html {
-  height: 100%;
-  overflow: hidden;
+  min-height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  background: url("../assets/images/bg2.png") center / cover no-repeat;
 }
 
 body {
   position: relative;
   width: 100vw;
-  height: 56.25vw;
+  /* the full-screen (1920x1080) frame at every window size; a shorter window scrolls instead of squashing it */
+  aspect-ratio: 16 / 9;
+  min-height: 0;
+  height: auto;
   overflow: hidden;
-  background: url("../assets/images/bg2.png") center / 100% 100% no-repeat;
+  background: url("../assets/images/bg2.png") center / cover no-repeat;
 }
 
 /* ── Waves ── */
@@ -46,7 +51,7 @@ body {
   width: 100%;
   text-align: center;
   font-family: "Spicy Rice", cursive;
-  font-size: clamp(1rem, 3.5vw, 4rem);
+  font-size: 3.5vw;
   color: white;
   font-weight: 400;
   text-shadow: 0 0.21vw 0.21vw rgba(0, 0, 0, 0.25);
@@ -162,7 +167,7 @@ body {
 
 .types-pill-text {
   font-family: "Anton", sans-serif;
-  font-size: clamp(0.6rem, 1.7vw, 2rem);
+  font-size: 1.7vw;
   color: var(--purple);
   text-align: center;
   line-height: 1.3;
@@ -224,7 +229,7 @@ body {
   align-items: center;
   justify-content: center;
   font-family: "Baloo 2", cursive;
-  font-size: clamp(0.7rem, 1.35vw, 1.6rem);
+  font-size: 1.35vw;
   color: #424242;
   font-weight: 700;
   flex-shrink: 0;
@@ -235,7 +240,7 @@ body {
 
 .side-label {
   font-family: "Baloo 2", cursive;
-  font-size: clamp(0.5rem, 1.04vw, 1.2rem);
+  font-size: 1.04vw;
   color: var(--text-dark);
   font-weight: 400;
   white-space: nowrap;

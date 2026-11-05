@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>5 Types of Gyan</title>
     <link rel="stylesheet" href="./css/swiper-bundle.min.css" />
-    <link rel="stylesheet" href="./css/style.css" />
-    <link rel="stylesheet" href="./css/types.css" />
+    <link rel="stylesheet" href="./css/style.css?v=2" />
+    <link rel="stylesheet" href="./css/types.css?v=2" />
   </head>
   <body id="body">
     <!-- Language Selector -->
@@ -155,7 +155,6 @@
           slidesPerView: 1,
           speed: 600,
           loop: false,
-          grabCursor: true,
           keyboard: { enabled: true, onlyInViewport: true },
         });
 
@@ -172,6 +171,10 @@
         typesSwiper.on("slideChange", function () {
           updateSlide(typesSwiper.activeIndex);
         });
+
+        setTimeout(function () {
+          updateSlide(typesSwiper.activeIndex);
+        }, 50);
 
         var _origVal = typeof val === "function" ? val : null;
         window.val = function (lang) {

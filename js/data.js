@@ -33,8 +33,8 @@ var whatData = {
       },
     },
     {
-      src: "./assets/images/what/3.png",
-      type: "image",
+      src: "./assets/images/what/3.mp4",
+      type: "video",
       text: {
         english: "According to Jainism, There are 5 different types of Gyan",
         hindi: "जैन धर्म के अनुसार ज्ञान के 5 विभिन्न प्रकार होते हैं",
